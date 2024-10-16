@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ex2</title>
+</head>
+<body>
+
+
+
+
+
+
+<!-- post 포스트 쓰는 이유 로그인 정보값이 주소창에 들어가면 안되서  -->
+  <h1>연습1</h1>
+  <form action="/somewhere" method="post">
+    <input type="email" name="email" placeholder="이메일">
+    <input type="password" name="password" placeholder="비밀번호">
+    <button type="submit">로그인</button>
+  </form>
+
+
+
+
+  <h1>연습2</h1>
+    <form action="/somewhere" method="post">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <input type="id" name="id" placeholder="아이디">
+            </td>
+            <td rowspan="2">
+              <button type="submit">로그인</button>
+            </td>
+          <tr>
+            <td>
+              <input type="password" name="password" placeholder="비밀번호">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+
+
+
+
+
+
+  <h1>연습3</h1>
+
+
+
+  <form action="/somewhere" method="get">
+    <table>
+      <tbody>
+        <tr>
+          <th colspan="2">
+            <h2>개인 정보 작성</h2>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            이름
+          </td>
+          <td>
+            <input type="text" name="name">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            메일 주소
+          </td>
+          <td>
+            <input type="email" name="email">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            연락처
+          </td>
+          <td>
+            <input type="text" name="number">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            블로그/홈페이지
+          </td>
+          <td>
+            <input type="url" name="url">
+          </td>
+        </tr>
+        <tr>
+          <th colspan="2">
+            <button type="submit">제출하기</button>
+            <button type="reset">다시작성</button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+
+
+</body>
+</html>

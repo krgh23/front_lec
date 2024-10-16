@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>table</title>
+</head>
+<body>
+  <style>
+    #number1 { color: blue; font-size: 40px;}
+    .gray { color: gray }    
+    .red { color: red }    
+    .blue { color: blue }    
+    
+    .table1{
+           border-collapse: collapse;  /* separate : 디폴트, 각 영역의 태두리 구분한다. */
+                                  /* collapse : 각 영역의 테두리를 구분하지 않고 합친다.6 */
+    }
+    #top > th{
+      border: 1px solid gray;
+    }
+        
+    .table1 > thead th:nth-of-type(n) { width: 80px; }
+   
+    
+    .table1 > tbody td{
+      border: 1px solid gray;
+      height: 80px;
+      text-align: center;     /* 가로 방향 정렬 */
+      vertical-align: middle; /* 세로 방향 정렬 */
+    }
+    /* .table1 > tfoot td{
+      border: 1px solid red;
+      text-align: center;     /* 가로 방향 정렬 */
+    } */
+    
+    .table1 > tbody tr:hover{
+      background-color: antiquewhite;
+      cursor: pointer;
+    }
+    .table1 > tbody tr:active{
+      background-color: rgb(133, 85, 22);
+      cursor: pointer;
+    }
+
+
+  </style>
+  
+  <table class="table1">
+    <thead>
+      <tr>
+        <th colspan="7"><span>2024</span><span id="number1">10</span><span>February</span></th>
+      </tr>
+      <tr id="top">
+        <th>SUN</th>
+        <th>MON</th>
+        <th>TUE</th>
+        <th>WED</th>
+        <th>THU</th>
+        <th>FRI</th>
+        <th>SAT</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="gray">29</td>
+        <td class="gray">30</td>
+        <td class="red">1</td>
+        <td>2</td>
+        <td class="red">3</td>
+        <td>4</td>
+        <td class="blue">5</td>
+      </tr>
+      <tr>
+        <td class="red">6</td>
+        <td>7</td>
+        <td>8</td>
+        <td class="red">9</td>
+        <td>10</td>
+        <td class="red">11</td>
+        <td class="red">12</td>
+      </tr>
+      <tr>
+        <td class="red">13</td>
+        <td>14</td>
+        <td>15</td>
+        <td>16</td>
+        <td>17</td>
+        <td>18</td>
+        <td class="blue">19</td>
+      </tr>
+      <tr>
+        <td class="red">20</td>
+        <td>21</td>
+        <td>22</td>
+        <td>23</td>
+        <td>24</td>
+        <td>25</td>
+        <td class="blue">26</td>
+      </tr>
+      <tr>
+        <td class="red">27</td>
+        <td>28</td>
+        <td>29</td>
+        <td>30</td>
+        <td>31</td>
+        <td class="gray">1</td>
+        <td class="gray">2</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
