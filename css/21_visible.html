@@ -47,5 +47,35 @@
   </div>
 
 
+  <hr>
+
+
+  <style>
+    .sentence-wrap {
+      position: relative;
+    }
+    .keyword {
+      position: absolute;
+      top: -9999px;
+    }
+    .sentence:hover + .keyword {
+      position: absolute;
+      top: 20px;
+      left: 50px;
+      padding: 2px 10px;
+      border: 1px solid tomato;
+      border-radius: 3px;
+      background-color: beige;
+      font-size: 0.8em;
+ 
+    }  
+
+  </style>
+  <div class="sentence-wrap">
+    <div class="sentence">우리는 css를 배우고 있어요</div>
+    <div class="keyword">Cascad style sheet</div>
+  </div>
+
+
 </body>
 </html>
