@@ -17,6 +17,9 @@
     body {
       padding: 0 250px;
     }
+    a {
+      text-decoration: none;
+    }
     header {
       margin: 30px auto;
     }
@@ -34,21 +37,38 @@
     .gnb{
       display: flex;
       background-color: #303030;
-
-      
     }
-    .gnb > li {
+
+    .gnb > li > a {
       display: block;
       width: 80px;
       height: 40px;
       line-height: 40px;
-      color: #f0f8ff;
       text-align: center;
-    }
-    .gnb > li > a {
       color: #f0f8ff;
     }
-  
+    .gnb > li > a:hover {
+      background-color: #00aa00;
+    }
+    .main-section {
+      display: flex;
+    }
+    .left-section {
+      flex : 3;
+      border: 1px solid #808080;
+      padding: 5px;
+      margin-right: 10px;
+    }
+    .right-section {
+      flex : 1;
+      border: 1px solid #808080;
+      padding: 5px;
+    }
+    article {
+      border: 1px solid #808080;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
