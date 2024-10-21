@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import url("https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css");
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+    * {
+      font-family: "Noto Sans KR", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      color: #303030;
+    }
+    body {
+      padding: 0 250px;
+    }
+    header {
+      margin: 30px auto;
+    }
+    .wrap {
+      min-width: 400px;
+    }
+    .title {
+      border: 1px solid blue;/*추후지울것*/
+      font-size: 32px;
+      font-weight: 700;
+      color: #303030;
+      text-align: center;
+      margin: 50px auto 50px;
+    }
+    .gnb{
+      display: flex;
+      background-color: #303030;
+
+      
+    }
+    .gnb > li {
+      display: block;
+      width: 80px;
+      height: 40px;
+      line-height: 40px;
+      color: #f0f8ff;
+      text-align: center;
+    }
+    .gnb > li > a {
+      color: #f0f8ff;
+    }
+  
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1 class="title">Website</h1>
+  </header>
+  <nav>
+    <ul class="gnb">
+      <li><a href="#">메뉴1</a></li>
+      <li><a href="#">메뉴2</a></li>
+      <li><a href="#">메뉴3</a></li>
+      <li><a href="#">메뉴4</a></li>
+      <li><a href="#">메뉴5</a></li>
+    </ul>
+  </nav>
+  <main class="main-section">
+    <section class="left-section">
+      <article>
+        <h4 class="sub-title">Title</h2>
+        <p>Description</p>
+        <div class="img"></div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus a aliquet nisl, in commodo nulla. Sed sagittis massa risus, vel feugiat nisi consectetur vitae. Donec porta libero vitae nisl accumsan faucibus. Maecenas varius tincidunt euismod. Quisque vitae consequat eros, et efficitur neque. Donec odio nisl, hendrerit a feugiat ut, euismod a tellus. Phasellus id augue sapien.</p>
+      </article>
+      <article>
+        <h4 class="sub-title">Title</h2>
+        <p>Description</p>
+        <div class="img"></div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus a aliquet nisl, in commodo nulla. Sed sagittis massa risus, vel feugiat nisi consectetur vitae. Donec porta libero vitae nisl accumsan faucibus. Maecenas varius tincidunt euismod. Quisque vitae consequat eros, et efficitur neque. Donec odio nisl, hendrerit a feugiat ut, euismod a tellus. Phasellus id augue sapien.</p>
+      </article>
+    </section>
+    <section class="right-section">
+      <article>
+        <h4 class="sub-title">Title</h2>
+        <div class="img"></div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus a aliquet nisl, in commodo nulla. Sed sagittis massa risus, vel feugiat nisi consectetur vitae. Donec porta libero vitae nisl accumsan faucibus. Maecenas varius tincidunt euismod. Quisque vitae consequat eros, et efficitur neque.</p>
+      </article>
+      <article>
+        <h4 class="sub-title">Title</h2>
+        <div class="img"></div>
+      </article>
+    </section>
+  </main>
+  <footer>
+    <p>footer</p>
+  </footer>
+</div>
+</body>
+</html>
