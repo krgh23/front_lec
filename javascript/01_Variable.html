@@ -52,11 +52,11 @@
         → 정수를 나타낼 수 있는 숫자 데이터 타입
       4) boolean
         → true 또는 false
-      5) undefined
+      5) undefined - 값이 저장된 적이 없다
         → 선언 후 값을 할당하지 않은 변수 또는 값이 전달되지 않은 매개변수에 자동으로 할당되는 값
       6) symbol
         → 유일한 식별자(unique identifier)를 만든 뒤 객체 속성(property)으로 사용할 수 있는 값
-      7) null
+      7) null - 의도적으로 없는 값을 저장시킨것
         → 존재하지 않거나 유효하지 않은 object 또는 주소를 의도적으로 가리키는 참조
 -->
 
@@ -76,17 +76,79 @@
     2. 종류와 특징
                 | 스코프      | 재선언 | 할당 전     | 재할당 | 용도
       ----------|-------------|--------|-------------|--------|----------
-      1) var    | 함수 스코프 | 가능   | undefined   | 가능   | 함수 변수
+      1) var    | 전역 스코프 | 가능   | undefined   | 가능   | 전역 변수
       2) let    | 블록 스코프 | 불가능 | undefined   | 가능   | 지역 변수
       3) const  | 블록 스코프 | 불가능 | 사용 불가능 | 불가능 | 상수
 -->
 
+<!-- 
+    JavaScript 변수명(식별자) 규칙
+    1. 문자(ISO-8891-1 또는 Unicode), 숫자, 밑줄(_), 달러($) 기호 사용 가능
+    2. 첫 글자는 숫자일 수 없음 (두번째 부터 가능)
+    3. 대소문자 구분함
+    4. Camel Case 방식을 사용함 (myHome, myMoney, ....) ->첫번쨰 문자는 소문자 다음단어의 첫문자는 대문자
+-->
+<script>
+  /* var 선언 */
+  {
+    // 초기 할당 없이 선언하면 undefined 타입의 undefind 값을 가짐
+    var a;
+    console . log(a, typeof a);
+    // 재 할당이 가능함
+    var a; //같은 이름의 변수를 재선언 할 수 있다.
+    console . log(a, typeof a);
+    // number 타입의 값을 할당
+    a = 10 ; 
+    console.log(a, typeof a);
+    // string 타입의 값 재 할당
+    a = 'hello world'
+    console.log(a, typeof a);
+  }
+  a = false /* {}중괄호를 벗어나도 사용이 가능하다. */
+  console.log(a, typeof a);
+
+  /* let 선언 (ES6)*/
+{
+  // 초기 할당 없이 선언하면 undefined 타입의 undefind 값을 가짐
+  let b;
+  console.log(b, typeof b);
+  // 같은 이름의 변수를 재선언 하는것은 불가능(빨간색 밑줄 생성됨)
+  // let b;
+  // number 타입의 값 할당
+  b = 1.5;
+  console.log(b, typeof b);
+  // object 타입의 null 값 할당
+  b = null; //
+  console.log(b, typeof b);
+}
+// console.log(b, typeof b); // ReferenceError 오류가 발생한다. (이 변수를 찾을수 없다)
+
+/* const 선언 (ES, 상수 -> 상수는 관례상 변수를 대문자로 사용하는경우가 많음)*/
+{
+ // 선언과 동시에 초기할당이 모두 필요하다.
+ const c = 10;
+ console.log(c);
+ // 값을 바꾸는 재할당은 불가능하다.
+ c = 20; // TypeError 오류가 발생
+}
+
+</script>
+
 <!--
     Template literals(Template strings)
-    1. 백틱(backtick)으로 묶은 문자열을 의미한다.
+    1. 백틱(``, backtick)으로 묶은 문자열을 의미한다.
     2. 여러 줄로 이루어진 문자열(multi-line strings)을 처리할 수 있다.
     3. 문자열 보간(string interpolation) 기능을 사용할 수 있다.
 -->
+<script>
+  // multi-line strings
+  const sayHello = `안녕하세요
+  반갑습니다`;
+  console.log(sayHello);
+  // expression interpolation (표현식 보간)
+  const myName = 'sam smith';
+  console.log(`My name is ${myName}`);
+</script>
 
 <!--
     호이스팅(hoisting)
@@ -99,8 +161,31 @@
     4. var 키워드로 선언된 변수는 코드 어디에 존재하든 가장 먼저 처리되는 것으로 이해할 수 있다.
     5. 변수 선언과 초기화가 동시에 진행되는 경우 변수 선언만 분리해서 먼저 처리한다.
 -->
+<script>
+  myMoney = 1000;        // 2 (진행순서)
+  console.log(myMoney);  // 3 (진행순서)
+  var myMoney ;          // 1 (진행순서) -> var 변수 선언은 호이스팅에 의해서 항상 먼저 처리된다
+
+  console.log(myCar);
+  var myCar = 'sonata'; // var myCar;       ->선언
+                        // myCar = 'sonata' ->할당
+                        // 위 2개 코드로 분리한 뒤 var myCar; 만 호이스팅한다.
+  console.log(myCar);
+
+</script>
 
 <!-- 문제. 데이터를 변수에 저장하기 -->
+ <script>
+  /* 
+    별명, 성별, 나이를 적절한 변수에 할당하고 출력하기
+    예시) 내 별명은 슈퍼맨이고 25살된 남자입니다.
+  */
+  const nickname = '슈퍼맨';
+  const gender = '남자';
+  const age = 25;
+  console.log(`내 별명은 ${nickname}이고 ${age}살된 ${gender}입니다.`)
+
+ </script>
 
 </body>
 </html>
