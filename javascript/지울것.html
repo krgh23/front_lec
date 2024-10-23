@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+  <script>
+    window.onload = function() {
+        const sites = [
+            { name: '네이버', url: 'https://www.naver.com/' },
+            { name: '구글', url: 'https://www.google.com/' },
+            { name: '카카오', url: 'https://www.kakao.com/' }
+        ];
+
+        // 선택 박스와 링크 요소 생성
+        let selectHTML = '<select id="siteSelect">';
+        for (const site of sites) {
+            selectHTML += `<option value="${site.url}">${site.name}</option>`;
+        }
+        selectHTML += '</select>';
+
+        document.write(selectHTML);
+        document.write('<a id="siteLink" target="_blank" href="' + sites[0].url + '">바로가기</a>');
+
+        // 선택 박스의 변화에 따른 하이퍼링크 업데이트
+        const siteSelect = document.getElementById('siteSelect');
+        const siteLink = document.getElementById('siteLink');
+        siteSelect.addEventListener('change', function() {
+            siteLink.href = siteSelect.value; // 선택된 URL로 변경
+            siteLink.textContent = '바로가기'; // 링크 텍스트
+        });
+    }
+</script>
+</body>
+</html>
