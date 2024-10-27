@@ -85,7 +85,7 @@
 <hr>
 
 <script>
-  let month2 = 15;
+  let month2 = 8;
   let season2;
   /*
    if (month2 >= 3 && month2 < 6) {
@@ -99,7 +99,7 @@
   }
   */
   let mod = month2 % 12;
-  if(mod <= 2){4
+  if(mod <= 2){
     season2 = "겨울";
   } else if(mod <= 5) {
     season2 = '봄';
@@ -258,6 +258,9 @@
   while(b >= 1) {
     document.write(`<div>${b--}</div>`);
   }
+
+  
+  
 </script>
 
 <!--
@@ -315,8 +318,11 @@
   for(let day = 1; day <= 5; day++) {
     document.write(`<div>${day}일차</div>`);
     for(let hour = 1; hour <= 8; hour++){
-      document.write(`<div>&nbsp;&nbsp;${hour}교시</div>`);
+      document.write(`<div>&nbsp;&nbsp;${hour}교시`);
+      if(hour % 7 === 4) document.write(`</div><br>점심시간<br><br><div>`);
+        else if(hour % 8 === 0) document.write(`</div><hr><div>`);
     }
+    document.write(`</div>`);
   }
 </script>
 <hr>
@@ -353,17 +359,29 @@
 
   <script>
     //문제. 구구단 변형하기. 각 구구단은 x5 까지만 출력하시요
+
+    /*
     for(let dan = 2; dan <= 9; dan++){
-      document.write(`<div>${dan}단</div>`)
-        for(let su =1; su <= 9; su++) {
-          document.write(`<div>${dan} x ${su} = ${dan * su}</div>`);
-          if(su === 5){
-          break;
+      document.write(`<div>${dan}단</div>`);
+      for(let su =1; su <= 9; su++) {
+        document.write(`<div>${dan} x ${su} = ${dan * su}</div>`);
+        if(su === 5){
+         break;
         }
       }
     }
+*/
+for(i = 1 ; i <= 9 ; i++){
+  document.write(`<div>${i}단</div>`);
+  for(multiplicand = 1 ; multiplicand <= 9 ; multiplicand++){
+    document.write(`<div>${i} x ${multiplicand} = ${i*multiplicand}</div>`);
+    if(multiplicand===5){
+      break;
+    }
+  }
+}
 
-  </script>
+</script>
   
   <hr>
 </body>

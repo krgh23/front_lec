@@ -179,10 +179,22 @@
     8시간까지는 기본시급, 초과 근무는 기본 시급의 1.5배
   */
   const hourlyWage = 10030;
-  const workignTime = 10;
-  const regularPay = hourlyWage * workignTime; // 기본시급계산
-  const extraPay = (workignTime<= 8 ? 0 : workignTime - 8) * hourlyWage * 0.5
-  document.write(`<div>${workignTime}시간 근무한 급여는 ${regularPay + extraPay}원 입니다.</div>`)
+  const workingTime = 26;
+
+  /*
+  const regularPay = hourlyWage * workingTime; // 기본시급계산
+  const extraPay = (workingTime<= 8 ? 0 : workingTime - 8) * hourlyWage * 0.5
+  document.write(`<div>${workingTime}시간 근무한 급여는 ${regularPay + extraPay}원 입니다.</div>`)
+  */
+
+  if(workingTime <= 1 || workingTime > 24) {
+    document.write(`일급 근무시간은 1시간~24시간 사이입니다.`)
+  } else {
+    let money = workingTime > 8 
+    ? (hourlyWage * (workingTime - 8) * 1.5) +  hourlyWage * 8 
+    : hourlyWage * workingTime ;
+    document.write(`<div>10시간 근무한 일급은 ${money}원 입니다.</div>`)
+  }
  </script>
 </body>
 </html>
