@@ -72,6 +72,9 @@
 
   const openPopup = () => {
 
+    // dont_open_today 쿠키 값 가져오기(쿠기가 없으면 undefined)
+    const dontOpenToday = Cookies.get('dont_open_today')
+
     // 팝업 창 화면 중앙에 띄우기
     const width = 320;
     const height = 480;
@@ -82,12 +85,17 @@
       alert('팝업창은 이미 열려있습니다');
       return; // openPopup 함수 실행 종료
     }
+    if(dontOpenToday){
+      alert('오늘은 팝업 창을 열 수 없습니다.');
+      return;  // openPopup 함수 실행종료
+    }
     popup = open('popup.html', '', `width=${width}, height=${height}, top=${top}, left=${left}`); // 팝업 창 열기
     opened = true;
     if(!popup){
     alert('팝업 차단을 해제해 주세요');
     }
   }
+
   const closePopup = () => {
     if(opened) {
       popup.close();  // 팝업 창 닫기
@@ -130,7 +138,7 @@
     name: '네이버',
     url: 'https://www.naver.com',
   }
-  
+
   const goBtn = document.getElementById('go-btn')
 
   goBtn.textContent = site.name; 
