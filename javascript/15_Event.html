@@ -627,7 +627,7 @@
     chkEach[i].addEventListener('click', function(event){
       let total = 0;
       for(let j = 0; j < chkEach.length; j++)
-      total += chkEach[j].checked; // true 는 1 로 누적되고, false는 0으로 누적된다.
+        total += chkEach[j].checked; // true 는 1 로 누적되고, false는 0으로 누적된다.
       chkAll.checked = total === chkEach.length;
     })
   }
@@ -642,6 +642,7 @@
 <!-- 문제7. 검색 화면 구성하기 -->
 <h4>검색 화면 구성하기</h4>
 <div style="margin-bottom: 20px;">
+  <!-- 인라인 이벤트 모델에서 인자로 this 를 전달하면 이벤트 핸들러는 해당 this 값을 이벤트 대상(target)으로 사용할 수 있다. -->
   <input type="radio" name="category" id="title" onclick="displaySearchBox(this)"><label for="title">제목</label>
   <input type="radio" name="category" id="date" onclick="displaySearchBox(this)"><label for="date">날짜</label> 
   <input type="radio" name="category" id="price" onclick="displaySearchBox(this)"><label for="price">가격</label>
@@ -676,6 +677,18 @@
 </style>
 <script>
   // 선택한 카테고리의 검색 화면만 화면에 나타내시오.
+
+  const displaySearchBox = (radio) => {
+    const searchBoxes = document.getElementsByClassName('search-boxes');
+    for(const searchBox of searchBoxes){
+      if(searchBox.id.startsWith(radio.id)){
+        searchBox.style.display = 'block'
+      } else {
+        searchBox.style.display = 'none'
+      }
+    }
+  }
+
 
 </script>
 <hr>
@@ -743,7 +756,26 @@
 </style>
 <script>
   // 계산기가 동작할 수 있도록 구현하시오.
-  
+  const calculate = (btn) => {
+    const result = document.getElementById('result');
+    if(btn.textContent === 'AC' ){
+      result.value = '0'
+    } else if (btn.textContent === '←' ){
+      if(result.value.length === 1){
+        result.value = 0;
+      } else {  
+        result.value = result.value.slice(0, -1); // result.value.substring(0, length-1) : substring는 양수만 가능, slice는 음수도 가능 둘다 같은내용
+      }
+    } else if (btn.textContent === '=' ){
+      result.value = eval(result.value)
+    } else {
+      if(result.value === '0'){
+        result.value = btn.textContent;
+      }else {
+        result.value += btn.textContent;
+      }
+    }
+  }
 </script>
 <hr>
 
