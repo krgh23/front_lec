@@ -146,6 +146,107 @@
     3. 아직 BackEnd Server 가 없기 때문에 FrontEnd 수업에서 잠시만 사용한다.
 -->
 
+<h4>비동기 요청과 JSON 응답</h4>
+<div>
+  <button type="button" id="json-btn">json응답</button>
+  <div id="authors"></div>
+</div>
+<script>
+
+  document.getElementById('json-btn').addEventListener('click', function(event){
+
+    // 1. XMLHttpRequest 객체생성
+    const xhr = new XMLHttpRequest();
+
+    // 2. 요청 초기화
+    const method = 'GET'
+    const url = 'https://thetestrequest.com/authors/';
+
+    xhr.open(method, url);
+
+    // 3. 요청 상태(readyState) 변화 감지 이벤트
+    xhr.addEventListener('readystatechange', function(event) {
+
+      // 요청 상태 확인
+      if(xhr.readyState === XMLHttpRequest.DONE) {       // if(xhr.redyState === 4)
+
+        // 응답 상태 확인
+        if(xhr.status === 200){
+
+          // 응답 데이터가 json 인 경우 응답 속성으로 responseText 을 사용한다.
+          const responseDate = JSON.parse(xhr.responseText);
+          
+          // 응답 데이터를 태그로 만들어 화면에 출력한다.
+          let str = '';
+          responseDate.forEach(author => {
+            str += '<div class="autor">';
+            str += '<div>ID : ' + author.id +'</div>';
+            str += '<div>NAME : ' + author.name +'</div>';
+            str += '<div>EMAIL : ' + author.email +'</div>';
+            str += '<div><a href ="' + author.avatar + '"target="_black">AVATAR</a></div>';
+            str += '<div>CREATED_AT : ' + author.created_at + '</div>';
+            str += '<div>UPDATED_AT : ' + author.updated_at + '</div>';
+            str += '</div>';
+          })
+          document.getElementById('authors').innerHTML = str;
+
+        }
+      }
+
+    })
+
+    // 4. 요청 전송
+    xhr.send();
+
+  })
+</script>
+
+
+<hr>
+
+<h4>비동기 요청과 XML 응답</h4>
+<div>
+  <button type="button" id="xml-btn">xml응답</button>
+  <div id="author-list"></div>
+</div>
+<script>
+
+  document.getElementById('xml-btn').addEventListener('click',function(event){
+    const xhr = new XMLHttpRequest();
+    const method = 'GET';
+    const url = 'https://thetestrequest.com/authors.xml/';
+    xhr.open(method, url);
+    xhr.addEventListener('readystatechange', function(event){
+      if(xhr.readyState === XMLHttpRequest.DONE) {
+        if(xhr.status === 200) {
+          // 응답 데이터가 XML인 경우 responseXML 속성을 사용한다.
+          const responseDate = xhr.responseXML;
+          const authors =responseDate.getElementsByTagName('object');
+          let str = ''
+          for(const author of authors) {
+
+            str += '<div class="autor">';
+            str += '<div>ID : ' + author.getElementsByTagName('id')[0].textContent +'</div>';
+            str += '<div>NAME : ' + author.getElementsByTagName('name')[0].textContent +'</div>';
+            str += '<div>EMAIL : ' + author.getElementsByTagName('email')[0].textContent +'</div>';
+            str += '<div><a href ="' + author.getElementsByTagName('avatar')[0].textContent + '"target="_black">AVATAR</a></div>';
+            str += '<div>CREATED_AT : ' + author.getElementsByTagName('created-at')[0].textContent + '</div>';
+            str += '<div>UPDATED_AT : ' + author.getElementsByTagName('updated-at')[0].textContent + '</div>';
+            str += '</div>';
+          }
+          document.getElementById('author-list').innerHTML = str;
+
+        }
+      }
+    })
+    xhr.send();
+  })
+
+
+</script>
+
+
+
 <!--
     공공데이터 포털 서비스 활용하기(data.go.kr)
 
@@ -191,6 +292,28 @@
   <div id="contents"></div>
 </div>
 <script>
+  document.getElementById('public-data-btn').addEventListener('click', function(event){
+    const xhr = new XMLHttpRequest();
+    const method = 'GET';
+    let url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst';
+    url += '?serviceKey=qzRprpmLvEwKaofjeBYIpFAnTYW14dwLfXebw1%2BY9Wnal1h2obXMkStg78v8n4Aoh8up35Lym%2FVdUOFVb%2FplgA%3D%3D';
+    url += '&pageNo=1';
+    url += '&numOfRows=1000';
+    url += '&base_date=20241031';
+    url += '&base_time=0500';
+    url += '&nx=61';
+    url += '&ny=125';
+    url += '&dataType=JSON';
+    xhr.open(method,url);
+    xhr.addEventListener('load', function(event){
+      const responseDate = JSON.parse(xhr.responseText);
+      console.log(responseDate);
+    })
+    xhr.addEventListener('error', function(event){
+      console.log(xhr.status, xhr.statusText)
+    })
+    xhr.send();
+  })
 
 </script>
 <hr>
@@ -210,12 +333,84 @@
   <tbody id="photos"></tbody>
 </table>
 <script>
+/*
+  const getPhotoBtn = document.getElementById('get-photo-btn');
+  
+  getPhotoBtn.addEventListener('click', function() {
+    const albumId = document.getElementById('album-id').value;
+
+    if (!albumId || isNaN(albumId) || albumId < 1 || albumId > 100) {
+      alert('1부터 100 사이의 앨범 ID를 입력해주세요.');
+      return;
+    }
+
+    const xhr = new XMLHttpRequest();
+    const url = 'https://jsonplaceholder.typicode.com/photos';
+    const method = 'GET';
+
+    xhr.open(method, url);
+    xhr.addEventListener('readystatechange', function(event) {
+      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        const photos = JSON.parse(xhr.responseText);
+        
+        // 앨범 ID에 따른 필터링
+        const filteredPhotos = photos.filter(photo => photo.albumId == albumId);
+        
+        // 표에 데이터 렌더링
+        const photosTable = document.getElementById('photos');
+        photosTable.innerHTML = ''; // 이전 검색 결과 초기화
+        
+        filteredPhotos.forEach(photo => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${photo.albumId}</td>
+            <td><img src="${photo.thumbnailUrl}" alt="thumbnail"></td>
+            <td>${photo.id}</td>
+            <td><a href="${photo.url}" target="_blank">${photo.title}</a></td>
+          `;
+          photosTable.appendChild(row);
+        });
+      }
+    });
+
+    xhr.send();
+  });
+*/
+
+
+
+
   /* 
     https://jsonplaceholder.typicode.com/photos
     앨범마다 포토가 50개씩 들어있는 상황의 정보가 제공된다.
     각 앨범(albumId) 마다 50개의 포토(id) 정보가 수록되어 있다.
     albumId 는 1 ~ 100 값을 가지고 있고, id 는 1 ~ 5000 값을 가지고 있다.
   */
+  document.getElementById('get-photo-btn').addEventListener('click', function(event) {
+    const xhr = new XMLHttpRequest();
+    const method = 'GET';
+    const url = 'https://jsonplaceholder.typicode.com/photos';
+    xhr.open(method, url);
+    xhr.addEventListener('load', function(event) {
+      const albumId = Number(document.getElementById('album-id').value) || 1;  // 사용자가 album-id 를 입력하지 않는다면 albumId = 1 로 설정한다.
+      const responseData = JSON.parse(xhr.responseText);
+      let str = '';
+      for(const photo of responseData) {
+        if(photo.albumId === albumId) {
+          str += '<tr>';
+          str += '  <td>' + photo.albumId + '</td>';
+          str += '  <td><img src="' + photo.thumbnailUrl + '" width="50px"></td>';
+          str += '  <td>' + photo.id + '</td>';
+          str += '  <td><a href="' + photo.url + '" target="_blank">' + photo.title + '</a></td>';
+          str += '</tr>';
+        }
+      }
+      document.getElementById('photos').innerHTML = str;
+    })
+    xhr.send();
+  })
+
+
 
 </script>
 <hr>
