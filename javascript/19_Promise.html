@@ -216,7 +216,7 @@
       예시 상황)
       1) 작업1 : 사용자가 입력한 이메일이 고객 DB에 있는지 조회한다.
       2) 작업2 : 고객 DB에 존재하는 이메일이라면 해당 고객에게 이메일을 발송한다.
-    3. then() 메소드는 새로운 Promise 를 반환하기 때문에 연속해서 호출할 수 있다.
+    3. then() 메소드는 새로운 Promise 를 반환하기 때문에 연속해서 호출할 수 있다.  ***중요***
     4. 사용 예시
         new Promise((resolve, reject) => {
           if(isSuccess) {
@@ -230,6 +230,28 @@
           .then((finalResult) => { finalResult 처리 })
           .catch((error) => { error 처리 })
 -->
+<h4>then() 메소드 연결</h4>
+<div>
+  <button type="button" onclick="methodChain()">체이닝</button>
+</div>
+<script>
+  const methodChain = () =>{
+
+    new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      const method = 'GET'
+      const url = 'https://thetestrequest.com/authors/1';
+      xhr.open(method, url);
+      xhr.addEventListener('load', function(event) {
+        resolve(JSON.parse(xhr.responseText));
+      })
+      xhr.send();
+    }).then(responseData => responseData.name)            // .then(responseData => {return responseData.name; })
+      .then(name => name + '님')                          // .then(name => {return name + '님';})
+      .then(authorName => console.log(authorName));
+  }
+
+</script>
 
 
 
@@ -240,8 +262,24 @@
   <button type="button" onclick="fakeApi('https://thetestrequest.com/authors/2')">authors 2</button>
 </div>
 <script>
-
+const fakeApi = (url) => {
+  new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    const method = 'GET';
+    xhr.open(method, url)
+    xhr.addEventListener('load', function(event){
+      resolve(JSON.parse(xhr.responseText));
+    })
+    xhr.addEventListener('error', function(event) {
+      reject(xhr.status);
+    })
+    xhr.send();
+  })
+  .then(responseData => console.log(responseData))  // resolve 값 전달
+  .catch(status =>  console.log(status));  // reject 값 전달
+}
 </script>
+
 <hr>
 
 
@@ -252,6 +290,39 @@
   <button type="button" id="get-info-btn">getInfo</button>
 </div>
 <script>
+  const getInfo = (url, method) => {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open(method, url)
+      xhr.addEventListener('load', function(event){
+        resolve(JSON.parse(xhr.responseText));
+      })
+      xhr.addEventListener('error', function(event) {
+        reject(xhr.status);
+      })
+      xhr.send();
+    });
+  }
+  //Promise를 반환하는 함수는 then과 catch를 연결할수있다.
+  document.getElementById('get-info-btn').addEventListener('click', function(event) { 
+    getInfo('https://thetestrequest.com/authors/1', 'GET')
+      .then(responseData => console.log(responseData))
+      .catch(status => console.log(status));
+  })  
+
+
+
+  /*
+  const getInfo = () => {
+    return new Promise();
+  }
+  const retValue = getInfo();
+  retValue.then().catch();
+  ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ 형식으로 변환가능
+  getInfo()
+    .then()
+    .catch();
+  */
 
 </script>
 <hr>
