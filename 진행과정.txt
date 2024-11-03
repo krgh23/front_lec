@@ -1,0 +1,19 @@
+html/css/javascript
+  *java
+mysql - database
+  *jsp/servlet
+  *spring legacy
+database framework : mybatis
+semi project (홈페이지 제작)
+---------------------
+spring boot
+react.js  -  const fn = () => { return <div> </div> }
+orm database : jpa
+linux - aws - docker (서버 배포 과정)
+chatgpt api
+---------------------
+app
+react native (react 를 이용한 앱 개발)
+flutter (ios, android 모두 개발 가능 - dart 언어를 새로 배워야 함)
+---------------------
+final project (홈페이지 또는 앱 개발)
